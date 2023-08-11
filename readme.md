@@ -28,6 +28,13 @@ const port = process.env.HTTP_PORT ? parseInt(process.env.HTTP_PORT, 10) : 8080;
 server.listen(port);
 
 process.on("SIGTERM", () => {
-  app.close();
+  console.info("SIGTERM received, shutting down.")
+  server.close();
+  process.exit(0)
+});
+
+process.on("uncaughtException", (err) => {
+  console.error("uncaughtException thrown", err);
+  process.exit(1);
 });
 ```
