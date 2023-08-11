@@ -16,21 +16,25 @@ import { App } from "./app.js";
 
 const app = await App.init();
 
+const { KEY_PATH, CERT_PATH, HTTP_PORT } = process.env;
+
+if (!KEY_PATH || !CERT_PATH) throw Error("Private key or certificate chain not set!");
+
 const options = {
-  key: readFileSync(process.env.KEY_PATH ?? "path/to/key.pem"),
-  cert: readFileSync(process.env.CERT_PATH ?? "path/to/cert.pem"),
+  key: readFileSync(KEY_PATH),
+  cert: readFileSync(CERT_PATH),
 };
 
 const server = createServer(options, app.instance);
 
-const port = process.env.HTTP_PORT ? parseInt(process.env.HTTP_PORT, 10) : 8080;
+const port = HTTP_PORT ? parseInt(HTTP_PORT, 10) : 8080;
 
 server.listen(port);
 
 process.on("SIGTERM", () => {
-  console.info("SIGTERM received, shutting down.")
+  console.info("SIGTERM received, shutting down.");
   server.close();
-  process.exit(0)
+  process.exit(0);
 });
 
 process.on("uncaughtException", (err) => {
