@@ -1,0 +1,14 @@
+{
+  "jsc": {
+    "target": "es2022",
+    "parser": {
+      "syntax": "typescript",
+      "decorators": true
+    }
+  },
+  "sourceMaps": "inline",
+  "module": {
+    "type": "es6",
+    "importInterop": "node"
+  }
+}
