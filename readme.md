@@ -8,11 +8,10 @@
 
 ```typescript
 import dotenv from "dotenv";
-import { readFileSync } from "fs";
-import { createServer } from "https";
-
 dotenv.config();
 
+import { readFileSync } from "fs";
+import { createServer } from "https";
 import { App } from "./app.js";
 
 const app = await App.init();
@@ -21,6 +20,7 @@ const options = {
   key: readFileSync(process.env.KEY_PATH ?? "path/to/key.pem"),
   cert: readFileSync(process.env.CERT_PATH ?? "path/to/cert.pem"),
 };
+
 const server = createServer(options, app.instance);
 
 const port = process.env.HTTP_PORT ? parseInt(process.env.HTTP_PORT, 10) : 8080;
