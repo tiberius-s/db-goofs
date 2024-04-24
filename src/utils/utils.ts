@@ -1,4 +1,4 @@
-export function tryRun<T>(fn: () => Promise<T>) {
+export function tryRun<T>(fn: () => T | Promise<T>) {
   try {
     return fn();
   } catch (error) {

@@ -1,9 +1,14 @@
 {
   "jsc": {
     "target": "es2022",
+    "keepClassNames": true,
     "parser": {
       "syntax": "typescript",
       "decorators": true
+    },
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
     }
   },
   "sourceMaps": "inline",

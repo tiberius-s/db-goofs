@@ -6,8 +6,6 @@ export enum Connection {
   DEFAULT = "default.db",
 }
 
-// TODO: also create an async Statement wrapper
-
 export class SQLite {
   db: sqlite.Database;
 
@@ -91,7 +89,6 @@ export class SQLite {
     });
   }
 
-  // TODO: needs to return async statement
   prepare(sql: string, params?: unknown[]) {
     return new Promise<sqlite.Statement>((resolve, reject) => {
       const statement = this.db.prepare(sql, params, function (err) {

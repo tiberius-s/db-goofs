@@ -2,9 +2,9 @@
 
 ## Personal DB Playground and Express server starter
 
-### Gotchas
+### Notes
 
-1. This is a very simple setup and really meant for local development. If the app structure is desired but you want to run this via HTTPS, you can change the entry point as follows.
+1. This is a very simple setup and meant for local development. If the app structure is desired but you want to run this via HTTPS, you can change the entry point as follows.
 
 ```typescript
 import dotenv from "dotenv";
