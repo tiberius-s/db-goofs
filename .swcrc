@@ -5,10 +5,6 @@
     "parser": {
       "syntax": "typescript",
       "decorators": true
-    },
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"]
     }
   },
   "sourceMaps": "inline",

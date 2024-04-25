@@ -7,10 +7,7 @@ export enum StatementFile {
 }
 
 const loadCommand = (path: string) => {
-  const { pathname } = new URL(
-    resolve("./src/commands", path),
-    import.meta.url
-  );
+  const { pathname } = new URL(resolve("./src/commands", path), import.meta.url);
   return readFileSync(pathname, "utf8");
 };
 

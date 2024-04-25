@@ -12,4 +12,6 @@ router.get("/", (_req: Request, res: Response) => {
   res.json({ message: "Ok" });
 });
 
-export { router };
+export {
+  router
+};

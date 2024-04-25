@@ -75,7 +75,7 @@ export class SQLite {
         function (err: Error, count: number) {
           if (err) return reject(err);
           resolve(count);
-        }
+        },
       );
     });
   }

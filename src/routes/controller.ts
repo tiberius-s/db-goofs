@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
-import { StatementFile, getSqlStatement } from "@/commands/commands.js";
-import { SQLite, RequestContext } from "@/utils/index.js";
+import { StatementFile, getSqlStatement } from "../commands/commands.js";
+import { SQLite, RequestContext } from "../utils/index.js";
 
 export class Controller {
   async createTable(req: Request, res: Response, next: NextFunction) {
