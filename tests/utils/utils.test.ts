@@ -1,6 +1,7 @@
 import { beforeEach, describe, it, mock } from "node:test";
 import assert from "node:assert";
-import { tryRun } from "@/utils/utils.js";
+
+import { tryRun } from "../../src/utils/utils.js";
 
 describe("tryRun", () => {
   beforeEach(() => mock.restoreAll());
@@ -27,7 +28,7 @@ describe("tryRun", () => {
     });
     const mockConsoleError = mock.method(console, "error", () => {});
     await tryRun(fn);
-    
+
     assert.ok(fn.mock.calls.length === 1);
     assert.ok(mockConsoleError.mock.calls.length === 1);
   });

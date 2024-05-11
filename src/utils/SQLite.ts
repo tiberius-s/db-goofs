@@ -102,3 +102,84 @@ export class SQLite {
     this.db.interrupt();
   }
 }
+
+export class SQLiteStatement {
+  stmt: sqlite.Statement;
+
+  constructor(stmt: sqlite.Statement) {
+    this.stmt = stmt;
+  }
+
+  bind(...params: unknown[]) {
+    return new Promise<sqlite.Statement>((resolve, reject) => {
+      this.stmt.bind(params, (err: Error) => {
+        if (err) return reject(err);
+        resolve(this.stmt);
+      });
+    });
+  }
+
+  reset() {
+    return new Promise<sqlite.Statement>((resolve) => {
+      this.stmt.reset(() => {
+        resolve(this.stmt);
+      });
+    });
+  }
+
+  finalize() {
+    return new Promise<void>((resolve, reject) => {
+      this.stmt.finalize((err: Error) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    });
+  }
+
+  run(...params: unknown[]) {
+    return new Promise<RunResult>((resolve, reject) => {
+      this.stmt.run(params, function (err: Error) {
+        if (err) return reject(err);
+        resolve(this);
+      });
+    });
+  }
+
+  get<T>() {
+    return new Promise<T | undefined>((resolve, reject) => {
+      this.stmt.get(function (err: Error, row?: T) {
+        if (err) return reject(err);
+        resolve(row);
+      });
+    });
+  }
+
+  all<T>() {
+    return new Promise<T[]>((resolve, reject) => {
+      this.stmt.all(function (err: Error, rows: T[]) {
+        if (err) return reject(err);
+        resolve(rows);
+      });
+    });
+  }
+
+  each<T>(params: unknown[], callback: (row: T) => unknown) {
+    return new Promise<T | number | void>((resolve, reject) => {
+      this.stmt.each(
+        params,
+        function (err: Error, row: T) {
+          if (err) return reject(err);
+          try {
+            callback(row);
+          } catch (error) {
+            reject(error);
+          }
+        },
+        function (err: Error, count: number) {
+          if (err) return reject(err);
+          resolve(count);
+        },
+      );
+    });
+  }
+}

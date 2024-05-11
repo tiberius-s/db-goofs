@@ -11,8 +11,8 @@
     "dev": "nodemon",
     "prestart": "npm run build",
     "start": "node ./build/index.js",
-    "test": "node --test --import @swc-node/register/esm-register ./tests/**/*.test.ts",
-    "test:cov": "npm test -- --experimental-test-coverage",
+    "test": "node --import @swc-node/register/esm-register ./tests/**/*.test.ts",
+    "test:cov": "node --test --experimental-test-coverage --import @swc-node/register/esm-register ./tests/**/*.test.ts",
     "lint": "eslint src/**",
     "format": "prettier --write --log-level warn src/**/*.ts"
   },
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
-    "@swc-node/register": "^1.9.0",
+    "@swc-node/register": "^1.9.1",
     "@swc/cli": "0.3.12",
     "@swc/core": "1.5.0",
     "@types/express": "4.17.21",

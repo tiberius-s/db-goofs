@@ -1,8 +1,9 @@
 import { describe, it } from "node:test";
 import assert from "node:assert";
-import { RequestContext } from "@/utils/request-context.js";
+
 import { Request } from "express";
-import { Connection } from "@/utils/SQLite.js";
+import { RequestContext } from "../../src/middlewares/request-context-handler.js";
+import { Connection } from "../../src/utils/SQLite.js";
 
 describe("RequestContext", () => {
   it("should create a new RequestContext instance", () => {
